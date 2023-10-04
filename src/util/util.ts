@@ -11,7 +11,9 @@ export function sortByTime<T extends timeData>(arr: T[]): T[] {
     //断言
 
     // 处理成 正确的类型
-    return new Date(a.time).getTime() - new Date(b.time).getDate()
+    return new Date(a.time).getTime() - new Date(b.time).getTime()
   })
+  // console.log(_arr);
+  
   return _arr
 }
