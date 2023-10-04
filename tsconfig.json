@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "outDir":"./",
+  },
+  "exclude": ["node_modules","dist"]
+}
