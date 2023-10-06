@@ -1,17 +1,28 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
+import test from './components/test.tsx'
+import test1 from './components/test1.tsx'
+import { provide,ref} from 'vue'
+function setupSon(msg){
+  console.log(msg);
+}
+function tsxSon(msg){
+  console.log(msg);
+}
+function setuoTsxSon(msg){
+  console.log(msg);
+}
+
+//依赖注入
+const hello = ref('hello HelloWorldSon')
+provide('hello',hello)
+// provide('myData',{data1,data2}) // 传多个
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <HelloWorld toSetupSon ="a" @setupSon="setupSon"/>
+  <test toTsxSon ="b" @tsxSon="tsxSon"/>
+  <test1 toSetupTsxSon = "c" @setuoTsxSon="setuoTsxSon"/>
 </template>
 
 <style scoped>
