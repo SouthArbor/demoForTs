@@ -1,8 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
-import test from './components/test.tsx'
-import test1 from './components/test1.tsx'
-import { provide,ref} from 'vue'
+import test from './components/test'
+import test1 from './components/test1'
+import { provide, ref,Component, onMounted } from 'vue'
+
 function setupSon(msg){
   console.log(msg);
 }
@@ -17,12 +18,20 @@ function setuoTsxSon(msg){
 const hello = ref('hello HelloWorldSon')
 provide('hello',hello)
 // provide('myData',{data1,data2}) // 传多个
+
+const hellWorldRef = ref(<Component>{})
+onMounted(() => { 
+  console.log(hellWorldRef.value.a);
+  console.log(hellWorldRef.value.f1);
+})
 </script>
 
 <template>
-  <HelloWorld toSetupSon ="a" @setupSon="setupSon"/>
-  <test toTsxSon ="b" @tsxSon="tsxSon"/>
-  <test1 toSetupTsxSon = "c" @setuoTsxSon="setuoTsxSon"/>
+  <HelloWorld ref="hellWorldRef"/>
+  <!-- <test/> -->
+  <!-- <HelloWorld toSetupSon ="a" @setupSon="setupSon"/> -->
+  <!-- <test toTsxSon ="b" @tsxSon="tsxSon"/>
+  <test1 toSetupTsxSon = "c" @setuoTsxSon="setuoTsxSon"/> -->
 </template>
 
 <style scoped>

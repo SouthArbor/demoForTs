@@ -115,7 +115,7 @@ const emit = defineEmits(["setupSon"])
 emit("setupSon","i am setupSon")
 </script> -->
 <!-- 获取真实dom -->
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { ref ,onMounted,nextTick} from 'vue'
 const num = ref(1);
 const h1Dom = ref(<HTMLElement>{})
@@ -131,8 +131,68 @@ setTimeout(() => {
     getInner()
   })
 }, 1000);
+</script> -->
+<!-- mixin -->
+<!-- <script setup lang="ts">
+// import { ref ,onMounted} from 'vue'
+import { onMounted } from 'vue';
+import { globalMixin, popStateChange, popState } from '../mixin/globalMixin'
+globalMixin()
+onMounted(() => {
+  console.log(1);
+  
+})
+</script> -->
+<!-- slot -->
+<!-- <script setup lang="ts">
+// import { ref ,onMounted} from 'vue'
+import pointDiv from './pointDiv.vue'
+</script> -->
+<!-- 一些杂项 defineExpose 响应式语法糖 -->
+<script setup lang="ts">
+import { ref,watch } from 'vue'
+import { $ref,$$,$} from 'vue/macros' // 嫌响应式语法糖报错,可以导入这个,或者写一个声明文件
+// toRef -> $toRef
+// shallowRef -> $shallowRef
+let a = $ref(1)
+// let a = ref(1)
+function f1() {
+  console.log(a); //此时可以看到打印出来的f1的内容为 console.log(a.value); 也就是编译后,自动给 a 加上了 .value
+}
+// $$ 不写$$,相当于监听的是a.value,监听是不成功的
+watch([$$(a)], () => { 
+
+})
+
+function f2() { 
+  return {
+    x: ref(5),
+    y: ref(6)
+  }
+}
+
+const { x, y } = $(f2()) //这样写解构出的x,y,直接就是x.value,y.value
+// 模版中就可以直接写 <p>{{x}}</p>,无需<p>{{x.value}}</p>
+
+// vue3中子组件中的变量需要暴露出去,父组建才能通过ref访问
+defineExpose({
+  a,
+  f1
+})
 </script>
+
 <template>
+  <!-- slot -->
+  <!-- <pointDiv>
+    <template #one>
+      <h1>hello</h1>
+    </template>
+  </pointDiv> -->
+
+  <!-- mixin -->
+  <!-- <button @click="popStateChange">{{ popState?'隐藏弹窗':'显示弹窗' }}</button>
+  <div v-if="popState">这是一个弹窗</div> -->
+
   <!-- <HelloWorldSon/> -->
 
   <!-- <h1>{{ toSetupSon }}</h1> -->
@@ -141,7 +201,7 @@ setTimeout(() => {
 
    <h1>{{ num1AddTwo }}</h1> -->
 
-   <h1 ref="h1Dom">{{ num }}</h1>
+   <!-- <h1 ref="h1Dom">{{ num }}</h1> -->
   <!--<h1>{{ obj.a }}</h1>
   <li v-for="(item,index) in arr" :key="index">{{ item }}</li> -->
 

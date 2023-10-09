@@ -28,14 +28,27 @@ import { ref,reactive } from "vue"
 // export default createByTsx
 
 // 父子传值
-type propsType = {
+// type propsType = {
+//   toTsxSon:string
+// }
+// function propTest(prap: propsType, context: any) {
+//   context.emit("tsxSon","i am tsxSon")
+//   return <div>
+//     <h1>{ prap.toTsxSon}</h1>
+//   </div>
+// }
+
+// export default propTest
+
+// slot
+import fnPointDic from './fnPointDiv'
+type Test = {
   toTsxSon:string
 }
-function propTest(prap: propsType, context: any) {
-  context.emit("tsxSon","i am tsxSon")
+function Test() {
   return <div>
-    <h1>{ prap.toTsxSon}</h1>
+    {fnPointDic({one:<h1>hell tsx</h1>})}
   </div>
 }
 
-export default propTest
+export default Test
