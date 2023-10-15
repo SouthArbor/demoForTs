@@ -148,16 +148,19 @@ onMounted(() => {
 // import { ref ,onMounted} from 'vue'
 import pointDiv from './pointDiv.vue'
 </script> -->
-<!-- 一些杂项 defineExpose 响应式语法糖 -->
+<!-- 一些杂项 defineExpose 响应式语法糖(响应式转换) -->
 <script setup lang="ts">
 import { ref,watch } from 'vue'
-import { $ref,$$,$} from 'vue/macros' // 嫌响应式语法糖报错,可以导入这个,或者写一个声明文件
+import { $ref, $$, $ } from 'vue/macros' // 嫌响应式语法糖报错,可以导入vue宏,或者写一个声明文件
+
+// !! 响应式语法糖(响应式转换) 该功能将从vue3.4核心中删除，除非使用 Vue 宏，否则该功能将不再起作用
+
 // toRef -> $toRef
 // shallowRef -> $shallowRef
 let a = $ref(1)
 // let a = ref(1)
 function f1() {
-  console.log(a); //此时可以看到打印出来的f1的内容为 console.log(a.value); 也就是编译后,自动给 a 加上了 .value
+  console.log(a); //此时可以看到打印出来的f1的内容为 console.log(a.value); 也就是编译阶段后,自动给 a 加上了 .value
 }
 // $$ 不写$$,相当于监听的是a.value,监听是不成功的
 watch([$$(a)], () => { 
