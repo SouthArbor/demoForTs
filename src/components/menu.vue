@@ -35,6 +35,7 @@ let menuArr = reactive(menuArrTemp)
 .menu-content{
   display: flex;
   border: 1px solid blue;
+  box-sizing: border-box;
   width: 100%;
   height: 50px;
   justify-content: space-around;

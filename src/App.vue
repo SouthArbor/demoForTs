@@ -30,7 +30,7 @@ import Menu from './components/menu.vue'
 
 <template>
   <Menu/>
-  <router-view></router-view>
+  <div class="view-main"><router-view></router-view></div>
 
   <!-- <HelloWorld ref="hellWorldRef"/> -->
   <!-- <test/> -->
@@ -40,4 +40,12 @@ import Menu from './components/menu.vue'
 </template>
 
 <style scoped>
+.view-main{
+  height: calc(100% - 50px);
+  /* height: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 </style>
